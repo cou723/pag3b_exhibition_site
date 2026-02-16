@@ -1,0 +1,14 @@
+---
+import TechCard from './TechCard.astro';
+
+interface Props {
+  variant?: 'cyan' | 'pink' | 'purple';
+  class?: string;
+}
+
+const { variant: _variant, class: className = '' } = Astro.props;
+---
+
+<TechCard class={className}>
+  <slot />
+</TechCard>

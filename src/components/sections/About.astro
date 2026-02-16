@@ -1,0 +1,74 @@
+---
+import ExplanationTabs from '@/components/ExplanationTabs.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import { explanations, metadata } from '@/data/content';
+---
+
+<section id="about" class="section section--secondary">
+  <div class="container">
+    <SectionTitle
+      title="About"
+      subtitle="Pag3bとは"
+      id="about-title"
+    />
+
+    <div class="about__grid">
+      <div class="about__intro" data-aos="fade-right">
+        <TechCard>
+          <h3>開発のきっかけ</h3>
+          <p>{metadata.developmentTrigger}</p>
+          <p class="about__period">
+            <span class="code">開発期間:</span> {metadata.developmentPeriod}
+          </p>
+        </TechCard>
+      </div>
+
+      <div class="about__explanation" data-aos="fade-left">
+        <h3 class="about__tabs-title">あなたに向けた説明</h3>
+        <ExplanationTabs explanations={explanations} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+  }
+
+  .about__intro h3 {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about__period {
+    margin-top: var(--spacing-md);
+    font-size: 0.875rem;
+  }
+
+  .about__tabs-title {
+    font-family: var(--font-headline);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about__grid {
+      gap: var(--spacing-lg);
+    }
+  }
+</style>

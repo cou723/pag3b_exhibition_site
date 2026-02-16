@@ -1,0 +1,19 @@
+---
+import TechButton from './TechButton.astro';
+
+interface Props {
+  href?: string;
+  variant?: 'cyan' | 'pink' | 'purple';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { href, variant, size = 'md' }: Props = Astro.props;
+
+// Map old variants to new variants
+const mappedVariant = variant === 'pink' || variant === 'purple' ? 'secondary' : 'primary';
+---
+
+<TechButton href={href} variant={mappedVariant} size={size}>
+  <slot />
+</TechButton>

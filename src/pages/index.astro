@@ -1,0 +1,35 @@
+---
+import About from '@/components/sections/About.astro';
+import Demo from '@/components/sections/Demo.astro';
+import Features from '@/components/sections/Features.astro';
+import Future from '@/components/sections/Future.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Resources from '@/components/sections/Resources.astro';
+import Specs from '@/components/sections/Specs.astro';
+import TechnicalDetails from '@/components/sections/TechnicalDetails.astro';
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout>
+  <Hero />
+  <About />
+  <Features />
+  <Specs />
+  <Demo />
+  <TechnicalDetails />
+  <Resources />
+  <Future />
+</Layout>
+
+<style>
+  /* Smooth scroll offset for fixed header */
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  @media (max-width: 768px) {
+    html {
+      scroll-padding-top: 60px;
+    }
+  }
+</style>

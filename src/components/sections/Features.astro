@@ -1,0 +1,77 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import type { FeatureItem } from '@/data/content';
+import { features } from '@/data/content';
+---
+
+<section id="features" class="section">
+  <div class="container">
+    <SectionTitle
+      title="Features"
+      subtitle="主な特徴"
+      align="center"
+      id="features-title"
+    />
+
+    <div class="features__grid">
+      {
+        features.map((feature: FeatureItem, index: number) => (
+          <TechCard
+            class="features__card"
+            data-aos="fade-up"
+            data-aos-delay={(index * 100).toString()}
+          >
+            <div class="features__number">{String(index + 1).padStart(2, '0')}</div>
+            <h3 class="features__title">{feature.title}</h3>
+            <p class="features__description">{feature.description}</p>
+          </TechCard>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  .features__card {
+    height: 100%;
+  }
+
+  .features__number {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    opacity: 0.6;
+  }
+
+  .features__title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .features__description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .features__grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .features__number {
+      font-size: 1.5rem;
+    }
+  }
+</style>

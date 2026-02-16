@@ -1,0 +1,31 @@
+{
+  "name": "pag3b_exhibition_site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "biome format --write ."
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "astro": "^5.17.1",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@biomejs/biome": "^2.3.14",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.2.3",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^10.0.0",
+    "eslint-plugin-astro": "^1.5.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0"
+  }
+}

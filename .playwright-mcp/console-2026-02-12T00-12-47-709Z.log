@@ -1,0 +1,18 @@
+[     320ms] ReferenceError: AOS is not defined
+    at http://localhost:4321/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts:1:1
+[     321ms] TypeError: Cannot set properties of undefined (setting 'AOS')
+    at https://unpkg.com/aos@2.3.4/dist/aos.js:1:182
+    at https://unpkg.com/aos@2.3.4/dist/aos.js:1:187
+[  204598ms] ReferenceError: AOS is not defined
+    at http://localhost:4321/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts:1:1
+[  204599ms] TypeError: Cannot set properties of undefined (setting 'AOS')
+    at https://unpkg.com/aos@2.3.4/dist/aos.js:1:182
+    at https://unpkg.com/aos@2.3.4/dist/aos.js:1:187
+[  224741ms] [ERROR] WebSocket connection to 'ws://localhost:4321/?token=IGCAN17zV6Gh' failed:  @ http://localhost:4321/@vite/client:1533
+[  224768ms] [ERROR] WebSocket connection to 'ws://localhost:4321/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/@vite/client:1766
+[  225770ms] [ERROR] WebSocket connection to 'ws://localhost:4321/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4321/@vite/client:1766
+[  227413ms] ReferenceError: AOS is not defined
+    at http://localhost:4321/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts:1:1
+[  227414ms] TypeError: Cannot set properties of undefined (setting 'AOS')
+    at https://unpkg.com/aos@2.3.4/dist/aos.js:1:182
+    at https://unpkg.com/aos@2.3.4/dist/aos.js:1:187

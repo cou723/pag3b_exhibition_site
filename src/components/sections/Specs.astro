@@ -1,0 +1,98 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import type { SpecItem } from '@/data/content';
+import { specs } from '@/data/content';
+---
+
+<section id="specs" class="section section--secondary">
+  <div class="container">
+    <SectionTitle
+      title="Specifications"
+      subtitle="ハードウェア仕様"
+      align="center"
+      id="specs-title"
+    />
+
+    <div class="specs__grid">
+      {
+        specs.map((spec: SpecItem, index: number) => (
+          <TechCard
+            class="specs__card"
+            data-aos="fade-up"
+            data-aos-delay={(index * 50).toString()}
+          >
+            <h3 class="specs__label">{spec.label}</h3>
+            <p class="specs__value">{spec.value}</p>
+            {spec.details && (
+              <ul class="specs__details">
+                {spec.details.map((detail: string) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+            )}
+          </TechCard>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .specs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .specs__card {
+    height: 100%;
+  }
+
+  .specs__label {
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .specs__value {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .specs__details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .specs__details li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .specs__details li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .specs__details li:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .specs__grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+  }
+</style>

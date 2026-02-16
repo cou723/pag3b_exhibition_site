@@ -1,0 +1,125 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import TechCard from '@/components/ui/TechCard.astro';
+import { type RepositoryLink, repositories } from '@/data/content';
+---
+
+<section id="resources" class="section section--secondary">
+  <div class="container">
+    <SectionTitle
+      title="Resources"
+      subtitle="GitHubリポジトリと関連リソース"
+      align="center"
+      id="resources-title"
+    />
+
+    <div class="resources__grid">
+      {repositories.map((repo: RepositoryLink, index: number) => (
+        <TechCard
+          class="resources__card"
+          data-aos="fade-up"
+          data-aos-delay={(index * 100).toString()}
+        >
+          <div class="resources__card-content">
+            <div class="resources__card-header">
+              {repo.icon && <span class="resources__card-icon">{repo.icon}</span>}
+              <h3 class="resources__card-title">{repo.name}</h3>
+            </div>
+            <p class="resources__card-description">{repo.description}</p>
+            <div class="resources__card-action">
+              <a
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="resources__card-link"
+              >
+                GitHubで見る
+              </a>
+            </div>
+          </div>
+        </TechCard>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .resources__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+  }
+
+  .resources__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resources__card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .resources__card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .resources__card-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .resources__card-title {
+    font-family: var(--font-headline);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 0;
+  }
+
+  .resources__card-description {
+    color: var(--color-text-secondary);
+    flex: 1;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .resources__card-action {
+    margin-top: auto;
+  }
+
+  .resources__card-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-headline);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: transparent;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    width: 100%;
+  }
+
+  .resources__card-link:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .resources__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,285 @@
+---
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import TechCard from "@/components/ui/TechCard.astro";
+import { demoInfo, externalLinks } from "@/data/content";
+---
+
+<section id="demo" class="section">
+  <div class="container">
+    <SectionTitle
+      title="Demo"
+      subtitle="測定体験について"
+      align="center"
+      id="demo-title"
+    />
+
+    <div class="demo__content">
+      <div class="demo__grid">
+        <div class="demo__duration" data-aos="fade-up">
+          <TechCard>
+            <h3 class="demo__card-title">所要時間</h3>
+            <p class="demo__duration-text">{demoInfo.duration}</p>
+          </TechCard>
+        </div>
+
+        <div class="demo__info-grid">
+          <TechCard class="demo__card" data-aos="fade-right">
+            <h3 class="demo__card-title">準備物</h3>
+            <ul class="demo__list">
+              {demoInfo.preparation.map((item: string) => <li>{item}</li>)}
+            </ul>
+          </TechCard>
+
+          <TechCard class="demo__card" data-aos="fade-left">
+            <h3 class="demo__card-title">注意点</h3>
+            <ul class="demo__list demo__list--warning">
+              {demoInfo.notes.map((note) => <li>{note.text}</li>)}
+            </ul>
+          </TechCard>
+        </div>
+
+        <div class="demo__steps" data-aos="fade-up">
+          <TechCard>
+            <h3 class="demo__card-title">体験内容</h3>
+            <ul class="demo__steps-list">
+              {
+                demoInfo.content.map((item: string, index: number) => (
+                  <li class="demo__step">
+                    <span class="demo__step-number">{index + 1}</span>
+                    {item}
+                  </li>
+                ))
+              }
+            </ul>
+          </TechCard>
+        </div>
+
+        <div class="demo__action" data-aos="fade-up">
+          <TechCard class="demo__action-card">
+            <h3 class="demo__card-title">測定サイトへ</h3>
+            <div class="demo__action-content">
+              <a
+                href={externalLinks.measureSiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="demo__action-link demo__action-link--disabled"
+              >
+                <span class="demo__action-text">測定サイトを開く</span>
+                <span class="demo__action-badge">近日公開予定</span>
+              </a>
+            </div>
+          </TechCard>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .demo__content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .demo__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .demo__duration {
+      margin-bottom: 0;
+    }
+
+    .demo__card-title {
+      font-family: var(--font-headline);
+      font-size: 1rem;
+      color: var(--color-accent);
+      text-align: center;
+      margin-bottom: var(--spacing-md);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .demo__duration-text {
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--color-text-primary);
+      margin-bottom: 0;
+    }
+
+    .demo__info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .demo__card {
+      height: 100%;
+    }
+
+    .demo__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .demo__list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .demo__list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .demo__list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    .demo__list--warning li::before {
+      content: "!";
+    }
+
+    .demo__steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .demo__step {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-text-secondary);
+    }
+
+    .demo__step:last-child {
+      margin-bottom: 0;
+    }
+
+    .demo__step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--color-accent);
+      color: white;
+      font-family: var(--font-headline);
+      font-weight: bold;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .demo__screenshots {
+      margin-top: var(--spacing-lg);
+    }
+
+    .demo__screenshot-single {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-subtle);
+    }
+
+    .demo__screenshot-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-base);
+    }
+
+    .demo__screenshot-single:hover .demo__screenshot-image {
+      transform: scale(1.02);
+    }
+
+    .demo__action {
+      margin-top: var(--spacing-lg);
+    }
+
+    .demo__action-card {
+      text-align: center;
+    }
+
+    .demo__action-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .demo__action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-headline);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: all var(--transition-base);
+      min-width: 200px;
+      position: relative;
+    }
+
+    .demo__action-link--disabled {
+      color: var(--color-text-secondary);
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border-subtle);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .demo__action-link--disabled:hover {
+      transform: none;
+      opacity: 0.7;
+    }
+
+    .demo__action-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      background: var(--color-bg-primary);
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .demo__action-note {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+      max-width: 400px;
+    }
+
+    @media (max-width: 768px) {
+      .demo__info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .demo__step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</section>

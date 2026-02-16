@@ -1,0 +1,192 @@
+---
+import TechCard from "@/components/ui/TechCard.astro";
+import type { DetailItem } from "@/data/content";
+import { details, technicalImages } from "@/data/content";
+import { Image } from "astro:assets";
+import techImage01 from "@/assets/images/technical/01-overview.png";
+import techImage02 from "@/assets/images/technical/02-metacarpal.png";
+import techImage03 from "@/assets/images/technical/03-finger-guides.png";
+import SectionTitle from "../ui/SectionTitle.astro";
+---
+
+<section id="technical" class="section section--secondary">
+  <div class="container">
+    <SectionTitle
+      title="Technical Details"
+      subtitle="こだわり・技術詳細"
+      align="center"
+      id="technical-title"
+    />
+
+    <div class="technical__grid">
+      {
+        details.map((detail: DetailItem, index: number) => (
+          <TechCard
+            class="technical__card"
+            data-aos="fade-up"
+            data-aos-delay={(index * 50).toString()}
+          >
+            <span class="technical__category">{detail.category}</span>
+            <h3 class="technical__title">{detail.title}</h3>
+            <p class="technical__content">{detail.content}</p>
+          </TechCard>
+        ))
+      }
+    </div>
+
+    <!-- キー配置に関連するテクニカル画像 -->
+    <div class="technical__images" data-aos="fade-up">
+      <div class="technical__image-wrapper">
+        <Image
+          src={techImage01}
+          alt={technicalImages[0].alt}
+          class="technical__detail-image"
+          loading="lazy"
+          format="webp"
+          width={1920}
+          height={1080}
+        />
+        <p class="technical__image-caption">{technicalImages[0].caption}</p>
+      </div>
+      <div class="technical__image-wrapper">
+        <Image
+          src={techImage02}
+          alt={technicalImages[1].alt}
+          class="technical__detail-image"
+          loading="lazy"
+          format="webp"
+          width={1920}
+          height={1080}
+        />
+        <p class="technical__image-caption">{technicalImages[1].caption}</p>
+      </div>
+      <div class="technical__image-wrapper">
+        <Image
+          src={techImage03}
+          alt={technicalImages[2].alt}
+          class="technical__detail-image"
+          loading="lazy"
+          format="webp"
+          width={1920}
+          height={1080}
+        />
+        <p class="technical__image-caption">{technicalImages[2].caption}</p>
+      </div>
+    </div>
+
+    <div class="technical__note" data-aos="fade-up">
+      <p>
+        これらのこだわりは、自作キーボード歴3年以上の経験と、
+        HMI（ヒューマンマシンインターフェース）研究に基づいています。
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .technical__images {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .technical__image-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto var(--spacing-md);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-secondary);
+  }
+
+  .technical__detail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .technical__image-caption {
+    padding: var(--spacing-md);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin: 0;
+  }
+
+  .technical__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .technical__card {
+    height: 100%;
+  }
+
+  .technical__category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-accent);
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .technical__title {
+    font-family: var(--font-headline);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .technical__content {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .technical__note {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .technical__note p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .technical__grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+
+    .technical__category {
+      font-size: 0.625rem;
+      padding: 0.125rem 0.5rem;
+    }
+
+    .technical__title {
+      font-size: 0.9375rem;
+    }
+
+    .technical__content {
+      font-size: 0.8125rem;
+    }
+
+    .technical__image-wrapper {
+      max-width: 100%;
+    }
+
+    .technical__image-caption {
+      font-size: 0.75rem;
+      padding: var(--spacing-sm);
+    }
+  }
+</style>

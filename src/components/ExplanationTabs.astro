@@ -1,0 +1,175 @@
+---
+import type { Explanation } from '@/data/content';
+
+interface Props {
+  explanations: Explanation[];
+}
+
+const { explanations }: Props = Astro.props;
+---
+
+<div class="explanation-tabs" data-tabs>
+  <div class="tabs__header" role="tablist">
+    {
+      explanations.map((exp: Explanation, index: number) => (
+        <button
+          class={`tabs__tab ${index === 0 ? 'tabs__tab--active' : ''}`}
+          data-tab={exp.level}
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`panel-${exp.level}`}
+        >
+          {exp.title}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="tabs__panels">
+    {
+      explanations.map((exp: Explanation, index: number) => (
+        <div
+          class={`tabs__panel ${index === 0 ? 'tabs__panel--active' : ''}`}
+          id={`panel-${exp.level}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${exp.level}`}
+        >
+          <div class="tabs__content">
+            {exp.content.map((paragraph: string) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const tabsContainer = document.querySelector('[data-tabs]');
+  if (!tabsContainer) throw new Error('Tabs container not found');
+
+  const tabs = tabsContainer.querySelectorAll('[data-tab]');
+  const panels = tabsContainer.querySelectorAll('.tabs__panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const targetLevel = tab.getAttribute('data-tab');
+      if (!targetLevel) return;
+
+      // Update tabs
+      tabs.forEach((t) => {
+        t.classList.remove('tabs__tab--active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('tabs__tab--active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // Update panels
+      panels.forEach((panel) => {
+        if (panel.id === `panel-${targetLevel}`) {
+          panel.classList.add('tabs__panel--active');
+        } else {
+          panel.classList.remove('tabs__panel--active');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .explanation-tabs {
+    width: 100%;
+  }
+
+  .tabs__header {
+    display: flex;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
+    padding: var(--spacing-sm);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .tabs__tab {
+    flex-shrink: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: var(--font-headline);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tabs__tab:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-accent);
+  }
+
+  .tabs__tab--active {
+    color: white;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .tabs__panel {
+    display: none;
+  }
+
+  .tabs__panel--active {
+    display: block;
+    animation: fadeIn var(--transition-base);
+  }
+
+  .tabs__panel {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .tabs__content {
+    padding: var(--spacing-lg);
+  }
+
+  .tabs__content p {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+  }
+
+  .tabs__content p:last-child {
+    margin-bottom: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tabs__header {
+      padding: var(--spacing-xs);
+    }
+
+    .tabs__tab {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: 0.625rem;
+    }
+
+    .tabs__content {
+      padding: var(--spacing-md);
+    }
+  }
+</style>
